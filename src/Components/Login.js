@@ -3,7 +3,7 @@
 // 1. API 발급 ( https://console.cloud.google.com/apis/ )
 // 2. 패키지 설치 ( npm add react-google-login)
 import React, { Component } from 'react';
-import { GoogleLogin } from 'react-google=login';
+import { GoogleLogin } from 'react-google-login';
 import styled from 'styled-components';
 
 class Login extends Component {
@@ -18,7 +18,11 @@ class Login extends Component {
     }
     // Google Login
     responeseGoogle = (res) => {
-        console.log(res)
+        this.setState({
+            id: res.googleId,
+            name: res.profileObj.name,
+            provider: 'google'
+        });
     }
 
     // Login Fail
