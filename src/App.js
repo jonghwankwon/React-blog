@@ -28,19 +28,47 @@ class App extends Component {
     this.setState({
       logged: false
     });
+
+    const Provider = window.sessionStorage.getItem('provider');
+    //Google AccessToken Remove
+    if(Provider === 'google' ){
+      const auth2 = window.gapi.auth2.getAuthInstance();
+      auth2.signout().then(function() {
+        console.log('Google Logout.')
+      });
+    }
+    //Kakao AccessToken Remove
+    else if(Provider === 'kakao' ){
+      window.Kakao.Auth.logout(function() {
+        console.log("Kakao logout");
+      });
+    }
+    //SessionStorage Clear
+    window.sessionStorage.clear();
+  }
+  componentDidMount(){
+    const id = window.sessionStorage.getItem('id');
+    if(id) {
+      this.onLogin();
+    }
+    else {
+      this.onLogout();
+    }
   }
 
   render() {
     const { logged, onLogout } =this.state;
 
     return ( 
-      <Layout>
-        <Header logged={logged} onLogout={onLogout} />
-        <Navigation />
-        <Content>
-          <Router />
-        </Content>
-      </Layout>
+      <Store.Provider value={this.state}>
+        <Layout>
+          <Header logged={logged} onLogout={onLogout} />
+          <Navigation />
+          <Content>
+            <Router />
+          </Content>
+        </Layout>
+      </Store.Provider>
     );
   }
 }

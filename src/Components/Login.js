@@ -7,8 +7,11 @@
 // 2. 패키지 설치 ( npm add react-kakao-login )
 import React, { Component } from 'react';
 import { GoogleLogin } from 'react-google-login';
-import { KakaoLogin } from 'react-kakao-login';
+import  KakaoLogin  from 'react-kakao-login';
 import styled from 'styled-components';
+import { graphql, compose } from 'react-apollo';
+import {login } from '../queries';
+import { withRouter } from "react-router-dom";
 
 class Login extends Component {
 
@@ -28,6 +31,7 @@ class Login extends Component {
             name: res.profileObj.name,
             provider: 'google'
         });
+        this.doSignUp();
     }
     // kakao login
     responeseKakao = (res) => {
@@ -35,13 +39,36 @@ class Login extends Component {
             id: res.profile.id,
             name: res.profile.properties.nickname,
             provider: 'kakao'
-        })
+        });
+        this.doSignUp();
     }
 
     // Login Fail
     // 로그인에 실패한 경우에는 에러를 넘겨줌 -> responseFail함수에서 error 출력
     responeseFail = (err) => {
         console.log(err);
+    }
+
+     //Login  Mutation
+     doSignUp = async () => {
+        const { id, name, provider } = this.state;
+        const user = await this.props.LoginMutation({
+            variavles: {
+                id: String(id),
+                name,
+                provider
+            }
+        });
+
+        if(user.data.login){
+            window.sessionStorage.setItem("id",id);
+            window.sessionStorage.setItem('name', name);
+            window.sessionStorage.setItem('provider', provider);
+            this.props.onLogin();
+            this.props.history.push('/');
+        }
+        else
+        alert("로그인에 실패하였습니다.");
     }
 
     render() {
@@ -81,4 +108,6 @@ const KakaoButton = styled(KakaoLogin)`
     font-weight: bold;
     text-align: center;`
 
-export default Login;
+export default compose(
+        graphql(login, { name: 'LoginMutation'})
+)(withRouter(login));
