@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { WiThermometerExterior } from "react-icons/wi";
 
 const API_KEY = '6d4d699668fa07da88feca53cc4abaf4'
 
@@ -31,12 +32,12 @@ class Home extends Component {
 
     render() {
         const { temperature, name, icon } = this.state;
-        const img_url = `http://openweathermap.org/img/w${icon}.png`;
+        // const img_url = `http://openweathermap.org/img/w/${icon}.png`;
 
         return (
             <>
             <h1>오늘의 날씨</h1>
-            <img alt="weather_icon" src={img_url}/>
+            {/* <img alt="weather_icon" src={img_url}/> */}
             <h3>온도 : {temperature}ºC</h3>
             <h3>날씨 : {name} </h3>
             </>
