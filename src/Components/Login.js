@@ -2,8 +2,12 @@
 // Google 로그인 구현
 // 1. API 발급 ( https://console.cloud.google.com/apis/ )
 // 2. 패키지 설치 ( npm add react-google-login)
+// kakao 로그인 구현
+// 1. API 발급 ( https://developers.kakao.com/ )
+// 2. 패키지 설치 ( npm add react-kakao-login )
 import React, { Component } from 'react';
 import { GoogleLogin } from 'react-google-login';
+import { KakaoLogin } from 'react-kakao-login';
 import styled from 'styled-components';
 
 class Login extends Component {
@@ -17,6 +21,7 @@ class Login extends Component {
         }
     }
     // Google Login
+    // 로그인에 성공하면 Json을 반환 -> responseGoogle함수에서 state에 id, name을 저장
     responeseGoogle = (res) => {
         this.setState({
             id: res.googleId,
@@ -24,8 +29,17 @@ class Login extends Component {
             provider: 'google'
         });
     }
+    // kakao login
+    responeseKakao = (res) => {
+        this.setState({
+            id: res.profile.id,
+            name: res.profile.properties.nickname,
+            provider: 'kakao'
+        })
+    }
 
     // Login Fail
+    // 로그인에 실패한 경우에는 에러를 넘겨줌 -> responseFail함수에서 error 출력
     responeseFail = (err) => {
         console.log(err);
     }
@@ -34,10 +48,17 @@ class Login extends Component {
         return (
             <Container>
                 <GoogleLogin
-                clientId={process.env.REACT_APP_Google} // 구글에서 발급받은 API KEY 값
-                buttonText="Google Login"               // 버튼에 보여질 텍스트
-                onSuccess={this.responeseGoogle}        // 로그인 인증에 성공한 경우 실행할 함수 정의
-                onFailure={this.responeseFail}          // 로그인 인증에 실패한 경우 실행할 함수 정의
+                    clientId={process.env.REACT_APP_Google} // 구글에서 발급받은 API KEY 값
+                    buttonText="Google Login"               // 버튼에 보여질 텍스트
+                    onSuccess={this.responeseGoogle}        // 로그인 인증에 성공한 경우 실행할 함수 정의
+                    onFailure={this.responeseFail}          // 로그인 인증에 실패한 경우 실행할 함수 정의
+                />
+                <KakaoButton
+                    jskey={process.env.REACT_APP_Kakao}
+                    buttonText="Kakao Login"
+                    onSuccess={this.responeseKakao}
+                    onFailure={this.responeseFail}
+                    getProfile="true"
                 />
             </Container>
         );
@@ -47,4 +68,17 @@ const Container = styled.div`
     display: flex;
     flex-flow: column wrap;`
 
-    export default Login;
+const KakaoButton = styled(KakaoLogin)`
+    padding: 0;
+    width: 190px;
+    height: 44px;
+    line-height: 44px;
+    color: #783c00;
+    background-color: #FFEB00;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;`
+
+export default Login;
