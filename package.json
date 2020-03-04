@@ -9,6 +9,7 @@
     "add": "^2.0.6",
     "global": "^4.4.0",
     "graphql-cli": "^3.0.14",
+    "graphql-yoga": "^1.18.3",
     "mongodb": "^3.5.4",
     "mongoose": "^5.9.3",
     "react": "^16.13.0",
