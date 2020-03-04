@@ -43,7 +43,7 @@ const ShortCut = styled.div`
 const Logo = styled.div`
     order: 2;
     width: 200px;
-    height: 80px;`
+    height: 90px;`
 
 const Search = styled.div`
     order: 3;
