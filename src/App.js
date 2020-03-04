@@ -27,8 +27,5 @@ const Layout = styled.div`
 
 const Content = styled.div`
   margin: 0 auto;
-  display: flex;
-  width: 100%;
-  flex-flow: row wrap;`
-
+`
 export default App;
