@@ -15,4 +15,4 @@ ReactDOM.render(
 
 //GraphQL Server connect
 const server = new GrapQLServer({ typeDefs, resolvers });
-server.start(() => console.log(`Server is running at httpL//localhost:000`));
+server.start(() => console.log(`Server is running at httpL//localhost:3000`));
