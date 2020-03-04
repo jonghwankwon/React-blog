@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { WiThermometerExterior } from "react-icons/wi";
-
 const API_KEY = '6d4d699668fa07da88feca53cc4abaf4'
 
 class Home extends Component {
@@ -16,7 +14,7 @@ class Home extends Component {
     }
     
     getWeather = () => {
-        fetch(`http://api.openweathermap.org/data/2.5/weather?q=Seoul&APPID=${API_KEY}`)
+        fetch(`http://api.openweathermap.org/data/2.5/weather?q=Daejeon&APPID=${API_KEY}`)    // 도시 이름으로 날씨 정보를 가져옴
         .then(Response => Response.json())
         .then(json => {
             this.setState({
@@ -31,8 +29,8 @@ class Home extends Component {
     }
 
     render() {
-        const { temperature, name, icon } = this.state;
-        // const img_url = `http://openweathermap.org/img/w/${icon}.png`;
+        const { temperature, name} = this.state;
+        // const img_url = `http://openweathermap.org/img/w/${icon}.png`; // icon 사용 시 const에 icon 추가
 
         return (
             <>
