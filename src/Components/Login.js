@@ -10,8 +10,6 @@ import { GoogleLogin } from 'react-google-login';
 import  KakaoLogin  from 'react-kakao-login';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
-// import { graphql, compose } from 'react-apollo';
-// import {login } from '../queries';
 
 class Login extends Component {
 
@@ -53,31 +51,6 @@ class Login extends Component {
         console.log(err);
     }
     // Login Fail
-    resoponseFail = (err) => {
-        console.error(err);
-    }
-     //Login  Mutation
-    //  doSignUp = async () => {
-    //     const { id, name, provider } = this.state;
-    //     const user = await this.props.LoginMutation({
-    //         variavles: {
-    //             id: String(id),
-    //             name,
-    //             provider
-    //         }
-    //     });
-
-    //     if(user.data.login){
-    //         window.sessionStorage.setItem("id",id);
-    //         window.sessionStorage.setItem('name', name);
-    //         window.sessionStorage.setItem('provider', provider);
-    //         this.props.onLogin();
-    //         this.props.history.push('/');
-    //     }
-    //     else
-    //     alert("로그인에 실패하였습니다.");
-    // }
-
     render() {
         return (
             <Container>
