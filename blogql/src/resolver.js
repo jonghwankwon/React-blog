@@ -12,7 +12,7 @@ const resolvers = {
         login: async (_, { id, name, provider }) => {
             const user = await User.findOne({ id, provider });
             if(!user) {
-                const dete = new Date();
+                const date = new Date();
                 const new_user = new User({
                     id,
                     name,
