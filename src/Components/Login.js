@@ -9,9 +9,9 @@ import React, { Component } from 'react';
 import { GoogleLogin } from 'react-google-login';
 import  KakaoLogin  from 'react-kakao-login';
 import styled from 'styled-components';
-import { graphql, compose } from 'react-apollo';
-import {login } from '../queries';
-import { withRouter } from "react-router-dom";
+// import { graphql, compose } from 'react-apollo';
+// import {login } from '../queries';
+// import { withRouter } from "react-router-dom";
 
 class Login extends Component {
 
@@ -108,6 +108,4 @@ const KakaoButton = styled(KakaoLogin)`
     font-weight: bold;
     text-align: center;`
 
-export default compose(
-        graphql(login, { name: 'LoginMutation'})
-)(withRouter(login));
+export default Login
