@@ -1,16 +1,16 @@
-//내 정보 관리
 import React, { Component } from 'react';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import withLogin from './LoginHOC';
 
 class MyPage extends Component {
     render() {
         return (
             <div>
-                Mypage
+                <h1>MyPage</h1>
             </div>
-        )
+        );
     }
 }
 
 export default withLogin(MyPage);
+

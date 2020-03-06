@@ -10,9 +10,8 @@ class Header extends Component {
             <Container>
                 <Element>
                     { logged ?
-                    <ShortCut><link to="/" onClick={onLogout}>로그아웃</link></ShortCut> :
-                    <ShortCut><Link to="/login">로그인 / 회원가입</Link></ShortCut>
-                    }
+                    <ShortCut><Link to="/" onClick={onLogout}>로그아웃</Link></ShortCut> :
+                    <ShortCut><Link to="/login">로그인 / 회원가입</Link></ShortCut>}
                     <Logo>
                         <img
                         width="100%"

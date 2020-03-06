@@ -9,9 +9,9 @@ import React, { Component } from 'react';
 import { GoogleLogin } from 'react-google-login';
 import  KakaoLogin  from 'react-kakao-login';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 // import { graphql, compose } from 'react-apollo';
 // import {login } from '../queries';
-// import { withRouter } from "react-router-dom";
 
 class Login extends Component {
 
@@ -31,7 +31,9 @@ class Login extends Component {
             name: res.profileObj.name,
             provider: 'google'
         });
-        this.doSignUp();
+        // this.doSignUp();
+        this.props.onLogin();
+        this.props.history.push('/');
     }
     // kakao login
     responeseKakao = (res) => {
@@ -40,7 +42,9 @@ class Login extends Component {
             name: res.profile.properties.nickname,
             provider: 'kakao'
         });
-        this.doSignUp();
+        // this.doSignUp();
+        this.props.onLogin();
+        this.props.history.push('/');
     }
 
     // Login Fail
@@ -48,40 +52,43 @@ class Login extends Component {
     responeseFail = (err) => {
         console.log(err);
     }
-
-     //Login  Mutation
-     doSignUp = async () => {
-        const { id, name, provider } = this.state;
-        const user = await this.props.LoginMutation({
-            variavles: {
-                id: String(id),
-                name,
-                provider
-            }
-        });
-
-        if(user.data.login){
-            window.sessionStorage.setItem("id",id);
-            window.sessionStorage.setItem('name', name);
-            window.sessionStorage.setItem('provider', provider);
-            this.props.onLogin();
-            this.props.history.push('/');
-        }
-        else
-        alert("로그인에 실패하였습니다.");
+    // Login Fail
+    resoponseFail = (err) => {
+        console.error(err);
     }
+     //Login  Mutation
+    //  doSignUp = async () => {
+    //     const { id, name, provider } = this.state;
+    //     const user = await this.props.LoginMutation({
+    //         variavles: {
+    //             id: String(id),
+    //             name,
+    //             provider
+    //         }
+    //     });
+
+    //     if(user.data.login){
+    //         window.sessionStorage.setItem("id",id);
+    //         window.sessionStorage.setItem('name', name);
+    //         window.sessionStorage.setItem('provider', provider);
+    //         this.props.onLogin();
+    //         this.props.history.push('/');
+    //     }
+    //     else
+    //     alert("로그인에 실패하였습니다.");
+    // }
 
     render() {
         return (
             <Container>
                 <GoogleLogin
-                    clientId={process.env.REACT_APP_Google} // 구글에서 발급받은 API KEY 값
+                    clientId={"283738042758-pedrdsv7uqgt8dvpo09oceaieb02j38s.apps.googleusercontent.com"} // 구글에서 발급받은 API KEY 값
                     buttonText="Google Login"               // 버튼에 보여질 텍스트
                     onSuccess={this.responeseGoogle}        // 로그인 인증에 성공한 경우 실행할 함수 정의
                     onFailure={this.responeseFail}          // 로그인 인증에 실패한 경우 실행할 함수 정의
                 />
                 <KakaoButton
-                    jskey={process.env.REACT_APP_Kakao}
+                    jskey={"bdd3a6c8936e20cd80e94e9d2dcd638a"}
                     buttonText="Kakao Login"
                     onSuccess={this.responeseKakao}
                     onFailure={this.responeseFail}
@@ -108,4 +115,4 @@ const KakaoButton = styled(KakaoLogin)`
     font-weight: bold;
     text-align: center;`
 
-export default Login
+export default withRouter(Login);

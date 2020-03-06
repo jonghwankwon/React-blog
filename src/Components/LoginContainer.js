@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Store from '../Store/store';
 import Login from './Login';
 
@@ -10,6 +10,6 @@ const LoginContainer = () => {
             <Login onLogin={store.onLogin}/> // Login 컴포넌트에 Store에 저장된 onLogin함수를 넣어줌
         )}
     </Store.Consumer>
-    )}
+    )};
 
 export default LoginContainer;

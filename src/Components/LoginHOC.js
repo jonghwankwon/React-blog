@@ -5,14 +5,14 @@ import LoginContainer from './LoginContainer';
 const withLogin = (WrappedComponent) =>
 
 class IsLogin extends Component {
-    render () {
+    render() {
         return (
             <Store.Consumer>
                 { store => {
                     if(store.logged === false)
-                        return <LoginContainer/>
+                        return <LoginContainer />;
                     else
-                        return <WrappedComponent/>
+                        return<WrappedComponent />;
                 }}
             </Store.Consumer>
         );
